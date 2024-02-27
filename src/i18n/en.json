@@ -1,0 +1,24 @@
+{
+  "toast": {
+    "internet-error": {
+      "title": "Internet connection lost",
+      "subtitle": "Some features may not function correctly"
+    },
+    "eula-accept-error": {
+      "title": "Unable to accept end user license agreement",
+      "subtitle": "Please try again later"
+    },
+    "photo-capture-error": {
+      "title": "Error taking photo",
+      "subtitle": "Please try again"
+    },
+    "ugc-start-error": {
+      "title": "Something went wrong",
+      "subtitle": "Please try again"
+    },
+    "ugc-submit-error": {
+      "title": "Error submitting photo",
+      "subtitle": "Please try again"
+    }
+  }
+}

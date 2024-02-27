@@ -1,0 +1,31 @@
+{
+  "name": "unimported-i18n-strings",
+  "version": "1.0.0",
+  "description": "Find unused i18n strings in javascript / typescript projects",
+  "main": "./dist/index.js",
+  "type": "module",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc"
+  },
+  "source": "./src/index.ts",
+  "author": "Kris Vanhoutte <vanhoutk@tcd.ie>",
+  "license": "ISC",
+  "keywords": [
+    "nodejs",
+    "cli",
+    "analysis"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "fs": "^0.0.1-security",
+    "glob": "^10.3.10",
+    "jsonc-parser": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^20.11.20",
+    "typescript": "^5.3.3"
+  }
+}
