@@ -1,29 +1,48 @@
 #!/usr/bin/env node
 import * as process from "process";
 import checkUnimportedI18nStrings from "./index";
-import chalk from "chalk";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
-if (process.argv.length < 4) {
-  console.log(
-    chalk.red(
-      "Usage: i18n-checker <path to i18n> <path to src> [--remove] [--updateIgnored] [--verbose] [--help]"
-    )
-  );
-  process.exit(1);
+interface CLIArgs {
+  remove: boolean;
+  updateIgnored: boolean;
+  verbose: boolean;
+  help: boolean;
+  pathToI18n: string;
+  pathToSrc: string;
 }
 
-const pathToI18n = process.argv[2];
-const pathToSrc = process.argv[3];
-const shouldRemove = process.argv.includes("--remove");
-const shouldUpdateIgnored = process.argv.includes("--updateIgnored");
-const verbose = process.argv.includes("--verbose");
-const help = process.argv.includes("--help");
+const argv = yargs(hideBin(process.argv))
+  .option("remove", {
+    alias: "r",
+    description: "This flag controls the removal process",
+    type: "boolean",
+  })
+  .option("updateIgnored", {
+    alias: "u",
+    description:
+      "This flag triggers update of the ignored strings based on i18n string",
+    type: "boolean",
+  })
+  .option("verbose", {
+    alias: "v",
+    description: "This flag enables verbose logging",
+    type: "boolean",
+  })
+  .option("help", {
+    alias: "h",
+    description: "Show help",
+    type: "boolean",
+  })
+  .demandOption(["pathToI18n", "pathToSrc"])
+  .parse() as CLIArgs;
 
 checkUnimportedI18nStrings(
-  pathToI18n,
-  pathToSrc,
-  shouldRemove,
-  shouldUpdateIgnored,
-  verbose,
-  help
+  argv.pathToI18n,
+  argv.pathToSrc,
+  argv.remove,
+  argv.updateIgnored,
+  argv.verbose,
+  argv.help
 );

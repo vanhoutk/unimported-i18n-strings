@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Find unused i18n strings in javascript / typescript projects",
   "main": "./dist/index.js",
-  "type": "module",
   "bin": "dist/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,14 +17,17 @@
     "analysis"
   ],
   "dependencies": {
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.0",
     "fs": "^0.0.1-security",
     "glob": "^10.3.10",
-    "jsonc-parser": "^3.2.1"
+    "jsonc-parser": "^3.2.1",
+    "ora": "^5.4.1",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/node": "^20.11.20",
+    "@types/yargs": "^16.0.0",
     "typescript": "^5.3.3"
   }
 }

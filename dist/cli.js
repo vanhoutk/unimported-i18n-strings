@@ -29,15 +29,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const process = __importStar(require("process"));
 const index_1 = __importDefault(require("./index"));
-const chalk_1 = __importDefault(require("chalk"));
-if (process.argv.length < 4) {
-    console.log(chalk_1.default.red("Usage: i18n-checker <path to i18n> <path to src> [--remove] [--updateIgnored] [--verbose] [--help]"));
-    process.exit(1);
-}
-const pathToI18n = process.argv[2];
-const pathToSrc = process.argv[3];
-const shouldRemove = process.argv.includes("--remove");
-const shouldUpdateIgnored = process.argv.includes("--updateIgnored");
-const verbose = process.argv.includes("--verbose");
-const help = process.argv.includes("--help");
-(0, index_1.default)(pathToI18n, pathToSrc, shouldRemove, shouldUpdateIgnored, verbose, help);
+const yargs_1 = __importDefault(require("yargs"));
+const helpers_1 = require("yargs/helpers");
+const argv = (0, yargs_1.default)((0, helpers_1.hideBin)(process.argv))
+    .option("remove", {
+    alias: "r",
+    description: "This flag controls the removal process",
+    type: "boolean",
+})
+    .option("updateIgnored", {
+    alias: "u",
+    description: "This flag triggers update of the ignored strings based on i18n string",
+    type: "boolean",
+})
+    .option("verbose", {
+    alias: "v",
+    description: "This flag enables verbose logging",
+    type: "boolean",
+})
+    .option("help", {
+    alias: "h",
+    description: "Show help",
+    type: "boolean",
+})
+    .demandOption(["pathToI18n", "pathToSrc"])
+    .parse();
+(0, index_1.default)(argv.pathToI18n, argv.pathToSrc, argv.remove, argv.updateIgnored, argv.verbose, argv.help);

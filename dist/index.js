@@ -22,10 +22,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const glob = __importStar(require("glob"));
 const fs = __importStar(require("fs"));
 const jsonc = __importStar(require("jsonc-parser"));
+const ora_1 = __importDefault(require("ora"));
 function removeEmptyObjects(obj) {
     for (const key in obj) {
         if (typeof obj[key] === "object") {
@@ -53,7 +57,8 @@ async function checkUnimportedI18nStrings(pathToI18n, pathToSrc, shouldRemove, s
         console.log("Usage: i18n-checker <path to i18n> <path to src> [--remove] [--updateIgnored] [--verbose] [--help]");
         return;
     }
-    console.log("Checking for unimported i18n strings...");
+    const spinner = (0, ora_1.default)("Checking for unimported i18n strings...").start();
+    console.log("");
     // Read the i18n file
     const i18nContent = JSON.parse(fs.readFileSync(pathToI18n, "utf8"));
     const i18nStrings = new Set(traverseObject(i18nContent));
@@ -92,6 +97,7 @@ async function checkUnimportedI18nStrings(pathToI18n, pathToSrc, shouldRemove, s
             break;
         }
     }
+    spinner.stop();
     // Log unimported i18n strings
     if (verbose) {
         for (const str of i18nStrings) {

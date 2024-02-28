@@ -1,6 +1,7 @@
 import * as glob from "glob";
 import * as fs from "fs";
 import * as jsonc from "jsonc-parser";
+import ora from "ora";
 
 function removeEmptyObjects(obj: any) {
   for (const key in obj) {
@@ -40,7 +41,8 @@ async function checkUnimportedI18nStrings(
     return;
   }
 
-  console.log("Checking for unimported i18n strings...");
+  const spinner = ora("Checking for unimported i18n strings...").start();
+  console.log("");
   // Read the i18n file
   const i18nContent = JSON.parse(fs.readFileSync(pathToI18n, "utf8"));
   const i18nStrings = new Set(traverseObject(i18nContent));
@@ -88,6 +90,8 @@ async function checkUnimportedI18nStrings(
       break;
     }
   }
+
+  spinner.stop();
 
   // Log unimported i18n strings
   if (verbose) {
