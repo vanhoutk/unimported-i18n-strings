@@ -1,6 +1,6 @@
-# i18n String Checker
+# unimported-i18n-strings
 
-i18n String Checker is a powerful and flexible tool designed to scan your project and identify any Internationalization (i18n) strings that are unimported. It provides additional options to remove or ignore these unimported i18n strings from your project.
+unimported-i18n-strings is tool designed to scan your project and identify any Internationalization (i18n) strings that are unimported. It provides additional options to remove or ignore these unimported i18n strings from your project.
 
 ## Installation
 
