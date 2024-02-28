@@ -9,8 +9,6 @@ interface CLIArgs {
   updateIgnored: boolean;
   verbose: boolean;
   help: boolean;
-  pathToI18n: string;
-  pathToSrc: string;
 }
 
 const argv = yargs(hideBin(process.argv))
@@ -35,12 +33,9 @@ const argv = yargs(hideBin(process.argv))
     description: "Show help",
     type: "boolean",
   })
-  .demandOption(["pathToI18n", "pathToSrc"])
   .parse() as CLIArgs;
 
 checkUnimportedI18nStrings(
-  argv.pathToI18n,
-  argv.pathToSrc,
   argv.remove,
   argv.updateIgnored,
   argv.verbose,

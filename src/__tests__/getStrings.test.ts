@@ -3,23 +3,15 @@ import path from "path";
 
 describe("getI18nStrings", () => {
   it("should return a set of i18n strings", () => {
-    const pathToI18n = path.resolve(
-      __dirname,
-      "../__mocks__/mockI18nJson.json"
-    );
     const verbose = true;
 
-    const result = getI18nStrings(pathToI18n, verbose);
+    const result = getI18nStrings(verbose);
 
     expect(result).toBeInstanceOf(Set);
     expect(result.size).toBeGreaterThan(0);
   });
 
   it("should remove ignored strings from the result", () => {
-    const pathToI18n = path.resolve(
-      __dirname,
-      "../__mocks__/mockI18nJson.json"
-    );
     const verbose = false;
 
     // Mock fs.existsSync and fs.readFileSync
@@ -32,7 +24,7 @@ describe("getI18nStrings", () => {
       ),
     }));
 
-    const result = getI18nStrings(pathToI18n, verbose);
+    const result = getI18nStrings(verbose);
 
     expect(result).toBeInstanceOf(Set);
     expect(result.has("ignoredString1")).toBe(false);

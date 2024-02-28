@@ -5,10 +5,9 @@ import removeUnimportedStrings from "./removeUnimported";
 import updateIgnoredStrings from "./updateIgnored";
 import getI18nStrings from "./getStrings";
 import { logHelp, logSourceFiles, logUnimportedStrings } from "./logging";
+import { getRootDir } from "./config";
 
 async function checkUnimportedI18nStrings(
-  pathToI18n: string,
-  pathToSrc: string,
   shouldRemove: boolean,
   shouldUpdateIgnored: boolean,
   verbose: boolean,
@@ -20,11 +19,13 @@ async function checkUnimportedI18nStrings(
   }
 
   const spinner = ora("Checking for unimported i18n strings...").start();
-  console.log("");
+  console.log(""); // Add a new line after the spinner
 
-  const i18nStrings = getI18nStrings(pathToI18n, verbose);
+  const i18nStrings = getI18nStrings(verbose);
+
   // Get all source files
-  const srcFiles = glob.sync(`${pathToSrc}/**/*.{ts,tsx,js,jsx}`);
+  const rootDir = getRootDir();
+  const srcFiles = glob.sync(`${rootDir}/**/*.{ts,tsx,js,jsx}`);
   logSourceFiles(srcFiles, verbose);
 
   // Check each source file
@@ -48,7 +49,7 @@ async function checkUnimportedI18nStrings(
 
   logUnimportedStrings(i18nStrings);
 
-  if (shouldRemove) removeUnimportedStrings(pathToI18n, i18nStrings);
+  if (shouldRemove) removeUnimportedStrings(i18nStrings);
   if (shouldUpdateIgnored) updateIgnoredStrings(i18nStrings);
 }
 

@@ -1,4 +1,6 @@
 import * as fs from "fs";
+import * as glob from "glob";
+import { getI18nPattern } from "./config";
 
 function traverseObject(obj: any, path: string[] = []): string[] {
   let keys: string[] = [];
@@ -12,22 +14,26 @@ function traverseObject(obj: any, path: string[] = []): string[] {
   return keys;
 }
 
-export default function getI18nStrings(
-  pathToI18n: string,
-  verbose: boolean
-): Set<string> {
-  const i18nContent = JSON.parse(fs.readFileSync(pathToI18n, "utf8"));
+export default function getI18nStrings(verbose: boolean): Set<string> {
+  const i18nPattern = getI18nPattern();
+  const i18nFiles = glob.sync(i18nPattern);
+
+  const i18nContent = i18nFiles.reduce((acc, file) => {
+    const content = JSON.parse(fs.readFileSync(file, "utf8"));
+    return { ...acc, ...content };
+  }, {});
+
   const i18nStrings = new Set(traverseObject(i18nContent));
 
   if (verbose) console.log(`Found ${i18nStrings.size} i18n strings`);
 
   // Read the ignored strings file
   let ignoredStrings: string[] = [];
-  if (fs.existsSync("unimportedI18nStrings.json")) {
+  if (fs.existsSync(".unimported-i18n-stringsrc.json")) {
     const ignoredContent = JSON.parse(
-      fs.readFileSync("unimportedI18nStrings.json", "utf8")
+      fs.readFileSync(".unimported-i18n-stringsrc.json", "utf8")
     );
-    ignoredStrings = ignoredContent.ignoreUnimported;
+    ignoredStrings = ignoredContent.ignoreUnimported || ignoredStrings;
   }
 
   // Remove ignored strings from i18nStrings

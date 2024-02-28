@@ -22,9 +22,7 @@ export function logUnimportedStrings(i18nStrings: Set<string>): void {
     return;
   }
 
-  console.log(
-    `Found ${i18nStrings.size} unimported i18n strings. Run with --verbose to see them.`
-  );
+  console.log(`Found ${i18nStrings.size} unimported i18n strings.`);
 
   for (const str of i18nStrings) {
     console.log(`Unimported i18n string: ${str}`);

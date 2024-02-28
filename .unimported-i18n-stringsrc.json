@@ -1,0 +1,4 @@
+{
+  "i18nPattern": "./src/**/mockI18nJson.json",
+  "rootDir": "./src"
+}
