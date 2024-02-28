@@ -36,6 +36,7 @@ unimported-i18n-strings [options]
 ### Command Line Options
 
 - `--remove`: This flag enables the removal process of unimported i18n strings from your original i18n file.
+- ⚠️ **WARNING:** `unimported-i18n-strings` is unable to detect if an i18n string is being used through some sort of string building, such as `` t(`some.${variable}.string`) ``, it's important to manually check the list of unimported strings **before** using the `--remove` flag.
 - `--updateIgnored`: This flag triggers an update of the ignored strings based on existing i18n string keys. Ignored strings are saved in a file named `unimportedI18nStrings.json`.
 - `--verbose`: Use this flag to enable verbose logging.
 - `--help`: Display the help message.
