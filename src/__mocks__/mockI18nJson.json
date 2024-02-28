@@ -1,0 +1,8 @@
+{
+  "title": "This is a test title",
+  "content": {
+    "welcome": "Welcome to the app",
+    "instructions": "Please follow the instructions",
+    "error": "An error occurred"
+  }
+}
