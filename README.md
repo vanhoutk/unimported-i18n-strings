@@ -7,20 +7,25 @@ unimported-i18n-strings is tool designed to scan your project and identify any I
 Clone the repository and install its dependencies with:
 
 ```
-TODO
+npm install --save-dev unimported-i18n-strings
 ```
-
-Replace `username` and `repo` with your Github username and repository name, respectively.
 
 ## Usage
 
-The package provides a CLI to interact with it.
+Create a new file called `.unimported-i18n-stringsrc.json` in the root of your project alongside your `package.json` to specify the pattern for your i18n files, and your root directory. Below are the defaults which will be used if you don't specify them.
+
+```json
+{
+  "i18nPattern": "./src/**/{en,en-US,en-CA,en-GB}.json",
+  "rootDir": "./src"
+}
+```
+
+Then run the package using
 
 ```
-unimported-i18n-strings --pathToI18n ./path-to-i18n.json --pathToSrc ./path-to-src [options]
+unimported-i18n-strings [options]
 ```
-
-It requires two mandatory arguments, `pathToI18n` and `pathToSrc`.
 
 ### Command Line Options
 
@@ -31,7 +36,7 @@ It requires two mandatory arguments, `pathToI18n` and `pathToSrc`.
 
 ## Functionality
 
-The package works by parsing your i18n JSON file and your source code. It identifies which strings from the i18n file are not imported anywhere in the source code.
+The package works by parsing your i18n JSON files and your source code. It identifies which strings from the i18n file are not imported anywhere in the source code.
 
 If flags `--remove` or `--updateIgnored` are passed, then the unimported strings are either removed from the original i18n file or added to the `unimportedI18nStrings.json` file, respectively.
 
