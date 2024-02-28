@@ -1,6 +1,6 @@
 {
   "name": "unimported-i18n-strings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Find unused i18n strings in javascript / typescript projects",
   "main": "./dist/index.js",
   "bin": {
