@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "Find unused i18n strings in javascript / typescript projects",
   "main": "./dist/index.js",
-  "bin": "dist/cli.js",
+  "bin": {
+    "unimported-i18n-strings": "./dist/cli.js"
+  },
   "scripts": {
     "test": "jest --silent",
     "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanhoutk/unimported-i18n-strings.git"
   },
   "source": "./src/index.ts",
   "author": "Kris Vanhoutte <vanhoutk@tcd.ie>",

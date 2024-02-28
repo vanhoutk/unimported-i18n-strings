@@ -4,10 +4,16 @@ unimported-i18n-strings is tool designed to scan your project and identify any I
 
 ## Installation
 
-Clone the repository and install its dependencies with:
+Clone the repository and install its dependencies with npm
 
 ```
 npm install --save-dev unimported-i18n-strings
+```
+
+or yarn
+
+```
+yarn add -D unimported-i18n-strings
 ```
 
 ## Usage
