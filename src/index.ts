@@ -7,6 +7,12 @@ import getI18nStrings from "./getStrings";
 import { logHelp, logSourceFiles, logUnimportedStrings } from "./logging";
 import { getRootDir } from "./config";
 
+const oraStub = {
+  stop(msg = "") {
+    console.log(msg);
+  },
+};
+
 async function checkUnimportedI18nStrings(
   shouldRemove: boolean,
   shouldUpdateIgnored: boolean,
@@ -18,7 +24,10 @@ async function checkUnimportedI18nStrings(
     return;
   }
 
-  const spinner = ora("Checking for unimported i18n strings...").start();
+  const spinner =
+    process.env.NODE_ENV === "test"
+      ? oraStub
+      : ora("Checking for unimported i18n strings...").start();
   console.log(""); // Add a new line after the spinner
 
   const i18nStrings = getI18nStrings(verbose);
