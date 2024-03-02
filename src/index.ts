@@ -60,6 +60,10 @@ async function checkUnimportedI18nStrings(
 
   if (shouldRemove) removeUnimportedStrings(i18nStrings);
   if (shouldUpdateIgnored) updateIgnoredStrings(i18nStrings);
+
+  if (i18nStrings.size > 0 && !shouldRemove && !shouldUpdateIgnored) {
+    process.exit(1);
+  }
 }
 
 export default checkUnimportedI18nStrings;
