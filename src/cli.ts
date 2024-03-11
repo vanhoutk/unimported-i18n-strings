@@ -35,9 +35,13 @@ const argv = yargs(hideBin(process.argv))
   })
   .parse() as CLIArgs;
 
-checkUnimportedI18nStrings(
-  argv.remove,
-  argv.updateIgnored,
-  argv.verbose,
-  argv.help
-);
+async function main() {
+  await checkUnimportedI18nStrings(
+    argv.remove,
+    argv.updateIgnored,
+    argv.verbose,
+    argv.help
+  );
+}
+
+main();
